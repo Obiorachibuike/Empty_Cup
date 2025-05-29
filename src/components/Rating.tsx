@@ -3,10 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faStar as fasStar,
   faStarHalfStroke,
-  faStar as farStar,
 } from '@fortawesome/free-solid-svg-icons';
 import { faStar as farStarRegular } from '@fortawesome/free-regular-svg-icons';
-
 interface RatingProps {
   rating: number; // e.g. 3.5, 4, 4.7, etc.
   maxRating?: number; // total stars, default 5
