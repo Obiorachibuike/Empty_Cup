@@ -1,21 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faHome,
-  faImage,
-  faMapPin,
-  faHeart,
-  faFilter,
-  faPhone,
-  faFlag,
-  faChevronRight,
-  faEyeSlash,
   faXmark,
-  faStar,
-  faStarHalfStroke,
   faSpinner,
-  faExclamationCircle,
-  faCalendarCheck,
 } from "@fortawesome/free-solid-svg-icons";
 
 // Import your components
@@ -26,6 +13,7 @@ import Header from "./components/Header";
 import NavBar from "./components/NavBar";
 import Details from "./components/Details";
 
+// rest of your code ...
 // Type definition for a designer
 interface Designer {
   id: string;
