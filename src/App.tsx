@@ -26,16 +26,28 @@ import Header from "./components/Header";
 import NavBar from "./components/NavBar";
 import Details from "./components/Details";
 
-// Main App component
-const App = () => {
-  const [designers, setDesigners] = useState([]);
-  const [showShortlistedOnly, setShowShortlistedOnly] = useState(false);
-  // MODIFIED: Initialize showDetails to an empty object, will populate in useEffect
-  const [showDetails, setShowDetails] = useState({});
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+// Type definition for a designer
+interface Designer {
+  id: string;
+  name: string;
+  description: string;
+  projects: number;
+  years: number;
+  price: string;
+  phone1: string;
+  phone2: string;
+  shortlisted: boolean;
+  rating: number;
+}
 
-  // Simulate fetching data from a backend API
+// Main App component
+const App: React.FC = () => {
+  const [designers, setDesigners] = useState<Designer[]>([]);
+  const [showShortlistedOnly, setShowShortlistedOnly] = useState<boolean>(false);
+  const [showDetails, setShowDetails] = useState<Record<string, boolean>>({});
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
   useEffect(() => {
     const fetchDesigners = async () => {
       setLoading(true);
@@ -43,7 +55,7 @@ const App = () => {
       try {
         await new Promise((resolve) => setTimeout(resolve, 1500));
 
-        const dummyData = [
+        const dummyData: Designer[] = [
           {
             id: "1",
             name: "Epic Designs",
@@ -97,15 +109,14 @@ const App = () => {
             rating: 4.2,
           },
         ];
+
         setDesigners(dummyData);
 
-        // MODIFIED: Initialize all designers to HIDE their details
-        const initialShowDetails = {};
-        dummyData.forEach(designer => {
-          initialShowDetails[designer.id] = false; // Set to false initially
+        const initialShowDetails: Record<string, boolean> = {};
+        dummyData.forEach((designer) => {
+          initialShowDetails[designer.id] = false;
         });
         setShowDetails(initialShowDetails);
-
       } catch (err) {
         setError("Failed to fetch designers. Please try again later.");
         console.error("Error fetching designers:", err);
@@ -117,7 +128,7 @@ const App = () => {
     fetchDesigners();
   }, []);
 
-  const toggleShortlist = (id) => {
+  const toggleShortlist = (id: string) => {
     setDesigners((prevDesigners) =>
       prevDesigners.map((designer) =>
         designer.id === id
@@ -131,10 +142,10 @@ const App = () => {
     setShowShortlistedOnly((prevState) => !prevState);
   };
 
-  const toggleDetails = (id) => {
+  const toggleDetails = (id: string) => {
     setShowDetails((prevState) => ({
       ...prevState,
-      [id]: !prevState[id], // This correctly toggles true/false
+      [id]: !prevState[id],
     }));
   };
 
@@ -145,7 +156,6 @@ const App = () => {
   return (
     <div className="min-h-screen bg-gray-100 font-sans antialiased flex flex-col items-center">
       <Header />
-
       <NavBar
         showShortlistedOnly={showShortlistedOnly}
         toggleShortlistedFilter={toggleShortlistedFilter}
@@ -199,27 +209,20 @@ const App = () => {
                   </div>
                 </div>
 
-                {/* Designer Rating */}
                 <Rating rating={designer.rating} />
-
-                {/* Designer Stats */}
                 <Stats
                   projects={designer.projects}
                   years={designer.years}
                   price={designer.price}
                 />
-
-                {/* Collapsible Details Section */}
-                {showDetails[designer.id] && (
-                  <Details designer={designer} />
-                )}
+                {showDetails[designer.id] && <Details designer={designer} />}
               </div>
-              {/* Action Buttons - Ensure showDetailsState is passed */}
+
               <DesignerActions
                 designer={designer}
                 toggleDetails={toggleDetails}
                 toggleShortlist={toggleShortlist}
-                showDetailsState={showDetails[designer.id]} // Pass current details visibility state
+                showDetailsState={showDetails[designer.id]}
               />
             </div>
           ))
