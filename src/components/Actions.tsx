@@ -1,43 +1,60 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faChevronRight,      // For "Details" button (arrow right)
-  faEyeSlash,          // For "Hide Details" button (slashed eye)
-  faHeart,             // For the "Shortlist" button (heart inside bookmark)
-  faPhone,             // For "Call" button
-  faBookmark,          // For the "Shortlist" button (solid bookmark)
-  faCircleExclamation, // For the Report button (solid exclamation circle)
+  faChevronRight,
+  faEyeSlash,
+  faHeart,
+  faPhone,
+  faBookmark,
+  faCircleExclamation,
 } from "@fortawesome/free-solid-svg-icons";
 
-// Removed: faBookmark as farBookmark import is no longer needed
+// Define the shape of the Designer object
+interface Designer {
+  id: string;
+  shortlisted: boolean;
+}
 
-const DesignerActions = ({ designer, toggleDetails, toggleShortlist, showDetailsState }) => {
+// Props interface
+interface DesignerActionsProps {
+  designer: Designer;
+  toggleDetails: (id: string) => void;
+  toggleShortlist: (id: string) => void;
+  showDetailsState: boolean;
+}
+
+const DesignerActions: React.FC<DesignerActionsProps> = ({
+  designer,
+  toggleDetails,
+  toggleShortlist,
+  showDetailsState,
+}) => {
   return (
     <div className="flex justify-around p-3 text-sm text-gray-600 flex-col">
 
-      {/* Details Button - Visible ONLY when details are NOT shown (initial state) */}
-      {!showDetailsState && ( // This will be true on initial load
+      {/* Show Details */}
+      {!showDetailsState && (
         <button
           className="flex items-center space-x-1 p-2 rounded-lg hover:bg-gray-100 transition-colors"
-          onClick={() => toggleDetails(designer.id)} // Toggles state, showing details
+          onClick={() => toggleDetails(designer.id)}
         >
           <FontAwesomeIcon icon={faChevronRight} className="w-5 h-5" />
           <span>Details</span>
         </button>
       )}
 
-      {/* Hide Details Button - Visible ONLY when details ARE shown (after clicking Details) */}
-      {showDetailsState && ( // This will be true after clicking "Details"
+      {/* Hide Details */}
+      {showDetailsState && (
         <button
           className="flex items-center space-x-1 p-2 rounded-lg hover:bg-gray-100 transition-colors"
-          onClick={() => toggleDetails(designer.id)} // Toggles state, hiding details
+          onClick={() => toggleDetails(designer.id)}
         >
           <FontAwesomeIcon icon={faEyeSlash} className="w-5 h-5" />
           <span>Hide</span>
         </button>
       )}
 
-      {/* Shortlist Button */}
+      {/* Shortlist */}
       <button
         className={`flex items-center space-x-1 p-2 rounded-lg transition-colors ${
           designer.shortlisted ? "text-orange-500 bg-orange-50" : "hover:bg-gray-100"
@@ -46,7 +63,7 @@ const DesignerActions = ({ designer, toggleDetails, toggleShortlist, showDetails
       >
         <span className="relative inline-flex items-center justify-center">
           <FontAwesomeIcon
-            icon={faBookmark} // Always show the solid bookmark
+            icon={faBookmark}
             className={`w-5 h-5 ${
               designer.shortlisted ? "text-orange-500" : "text-gray-600"
             }`}
@@ -55,25 +72,26 @@ const DesignerActions = ({ designer, toggleDetails, toggleShortlist, showDetails
             <FontAwesomeIcon
               icon={faHeart}
               className="absolute w-3 h-3 text-orange-500"
-              style={{ top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}
+              style={{
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+              }}
             />
           )}
         </span>
         <span>Shortlist</span>
       </button>
 
-      {/* Call Button */}
+      {/* Call */}
       <button className="flex items-center space-x-1 p-2 rounded-lg hover:bg-gray-100 transition-colors">
         <FontAwesomeIcon icon={faPhone} className="w-5 h-5" />
         <span>Call</span>
       </button>
 
-      {/* Report Button */}
+      {/* Report */}
       <button className="flex items-center space-x-1 p-2 rounded-lg hover:bg-gray-100 transition-colors">
-        <FontAwesomeIcon
-          icon={faCircleExclamation}
-          className="w-5 h-5"
-        />
+        <FontAwesomeIcon icon={faCircleExclamation} className="w-5 h-5" />
         <span>Report</span>
       </button>
     </div>
