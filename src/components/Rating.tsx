@@ -1,37 +1,69 @@
-// components/Rating.jsx
-import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faStar as fasStar,
-  faStarHalfAlt as fasStarHalfAlt,
-} from "@fortawesome/free-solid-svg-icons";
-import { faStar as farStar } from "@fortawesome/free-regular-svg-icons";
+  faLocationDot,
+  faImage,
+  faMapPin,
+  faHeart,
+  faArrowDownShortWide,
+  faCalendarCheck,
+} from '@fortawesome/free-solid-svg-icons';
 
-const Rating = ({ rating = 0 }) => {
-  const totalStars = 5;
+import {
+  faAddressCard as farAddressCard,
+} from '@fortawesome/free-regular-svg-icons';
 
-  const getStarIcon = (index) => {
-    if (rating >= index) return fasStar;
-    if (rating >= index - 0.5) return fasStarHalfAlt;
-    return farStar;
-  };
+interface AppNavbarProps {
+  showShortlistedOnly: boolean;
+  toggleShortlistedFilter: () => void;
+}
 
+const AppNavbar: React.FC<AppNavbarProps> = ({ showShortlistedOnly, toggleShortlistedFilter }) => {
   return (
-    <div className="flex items-center space-x-1 mb-4 px-8">
-      <div className="flex">
-        {Array.from({ length: totalStars }, (_, i) => (
-          <FontAwesomeIcon
-            key={i}
-            icon={getStarIcon(i + 1)}
-            className={getStarIcon(i + 1) === farStar ? "text-gray-300" : "text-black"}
-          />
-        ))}
+    <nav className="w-full bg-white shadow-sm p-4 flex justify-around items-center text-sm text-gray-600 border-t border-gray-200 rounded-b-xl">
+
+      {/* Contact */}
+      <div className="flex flex-col items-center space-y-1 text-orange-500">
+        <FontAwesomeIcon icon={farAddressCard} className="w-6 h-6" />
+        <span>Contact</span>
       </div>
-      <span className="text-sm text-gray-600 font-medium ml-2">
-        {rating.toFixed(1)} / {totalStars}
-      </span>
-    </div>
+
+      {/* Gallery */}
+      <div className="flex flex-col items-center space-y-1">
+        <FontAwesomeIcon icon={faImage} className="w-6 h-6" />
+        <span>Gallery</span>
+      </div>
+
+      {/* Map */}
+      <div className="flex flex-col items-center space-y-1 opacity-50 cursor-not-allowed">
+        <FontAwesomeIcon icon={faLocationDot} className="w-6 h-6" />
+        <span>Map</span>
+      </div>
+
+      {/* Shortlisted */}
+      <div
+        className={`flex flex-col items-center space-y-1 cursor-pointer ${
+          showShortlistedOnly ? 'text-orange-500' : ''
+        }`}
+        onClick={toggleShortlistedFilter}
+      >
+        <FontAwesomeIcon
+          icon={faCalendarCheck}
+          className={`w-6 h-6 ${
+            showShortlistedOnly ? 'text-orange-500' : 'text-gray-600'
+          }`}
+        />
+        <span>Shortlisted</span>
+      </div>
+
+      {/* Sort */}
+      <div className="flex flex-col items-center space-y-1">
+        <FontAwesomeIcon icon={faArrowDownShortWide} className="w-6 h-6" />
+        <span>Sort</span>
+      </div>
+
+    </nav>
   );
 };
 
-export default Rating;
+export default AppNavbar;
