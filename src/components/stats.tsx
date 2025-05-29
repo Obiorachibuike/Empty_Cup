@@ -7,7 +7,7 @@ type DesignerStatsProps = {
 };
 
 const DesignerStats: React.FC<DesignerStatsProps> = ({ projects, years, price }) => {
-  const stats = [
+  const stats: { label: string; value: number | string }[] = [
     { label: "Projects", value: projects },
     { label: "Years", value: years },
     { label: "Price", value: price },
