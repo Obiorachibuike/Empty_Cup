@@ -1,11 +1,7 @@
-// components/AppNavbar.tsx
-import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faLocationDot,
   faImage,
-  faMapPin,
-  faHeart,
   faArrowDownShortWide,
   faCalendarCheck,
 } from '@fortawesome/free-solid-svg-icons';
@@ -13,6 +9,7 @@ import {
 import {
   faAddressCard as farAddressCard,
 } from '@fortawesome/free-regular-svg-icons';
+
 
 interface AppNavbarProps {
   showShortlistedOnly: boolean;
