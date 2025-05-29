@@ -20,7 +20,7 @@ import {
 
 // Import your components
 import Rating from "./components/Rating";
-import Stats from "./components/Stats";
+import Stats from "./components/stats";
 import DesignerActions from "./components/Actions";
 import Header from "./components/Header";
 import NavBar from "./components/NavBar";
