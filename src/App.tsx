@@ -11,7 +11,7 @@ import Header from "./components/Header";
 import NavBar from "./components/NavBar";
 import Details from "./components/Details";
 
-// Type definition for a designer
+// Type definition for a designe
 interface Designer {
   id: string;
   name: string;
