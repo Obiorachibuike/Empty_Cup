@@ -1,8 +1,7 @@
-
-
 # Designer Directory App 🎨
 
 A responsive and modern React application that displays a list of designers fetched from a remote API. Users can view designer details, shortlist designers, and filter by shortlisted ones. Built using TypeScript, Tailwind CSS, and Axios.
+
 
 ## ✨ Features
 
@@ -13,6 +12,7 @@ A responsive and modern React application that displays a list of designers fetc
 - ✅ Responsive and clean UI with Tailwind CSS
 - ✅ FontAwesome icons for smooth UI experience
 
+
 ## 📦 Tech Stack
 
 - [React](https://reactjs.org/)
@@ -21,6 +21,7 @@ A responsive and modern React application that displays a list of designers fetc
 - [Tailwind CSS](https://tailwindcss.com/)
 - [FontAwesome](https://fontawesome.com/)
 
+
 ## 🚀 Getting Started
 
 ### 1. Clone the Repository
@@ -28,33 +29,46 @@ A responsive and modern React application that displays a list of designers fetc
 ```bash
 git clone https://github.com/your-username/designer-directory.git
 cd designer-directory
+```
 
-2. Install Dependencies
+### 2. Install Dependencies
 
+```bash
 npm install
+```
 
 or if you're using Yarn:
 
+```bash
 yarn install
+```
 
-3. Run the App Locally
+### 3. Run the App Locally
 
+```bash
 npm run dev
+```
 
-4. Build for Production
+### 4. Build for Production
 
+```bash
 npm run build
+```
 
-🌐 API Endpoint
+🌐 **API Endpoint**
 
 The app fetches data from:
 
+```
 https://empty-cup-server.onrender.com/api/designer
+```
 
-Ensure the API is live and accessible. You can modify this endpoint in App.tsx.
+Ensure the API is live and accessible. You can modify this endpoint in `App.tsx`.
 
-🗂️ Project Structure
 
+## 🗂️ Project Structure
+
+```
 src/
 ├── components/
 │   ├── Rating.tsx
@@ -66,24 +80,28 @@ src/
 ├── App.tsx
 ├── main.tsx
 └── index.css
+```
 
-📸 Screenshots
+
+## 📸 Screenshots
 
 (Add screenshots or a GIF here if desired)
 
-🤝 Contributing
+
+## 🤝 Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you’d like to change.
 
-📝 License
+
+## 📝 License
 
 This project is licensed under the MIT License — see the LICENSE file for details.
 
 
 ---
 
-Made with 💻 by Obiorachibuike 
+Made with 💻 by Obiorachibuike ❤️
+
 
 ---
-
 
