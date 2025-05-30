@@ -44,7 +44,7 @@ useEffect(() => {
     setError(null);
     try {
       // Fetch from the actual API
-      const response = await axios.get<Designer[]>("https://empty-cup-server.onrender.com");
+      const response = await axios.get<Designer[]>("https://empty-cup-server.onrender.com/api/designer");
       const designersData = response.data;
 
       setDesigners(designersData);
