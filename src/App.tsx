@@ -169,7 +169,6 @@ const hideDetails = (id: string) => {
   showDetails={showDetails}
   hideDetails={hideDetails}
   toggleShortlist={toggleShortlist}
-  showDetailsState={showDetails[designer.id]}
 />
             </div>
           ))
