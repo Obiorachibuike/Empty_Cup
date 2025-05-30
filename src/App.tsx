@@ -169,12 +169,13 @@ const hideDetails = (id: string) => {
                 {showDetails[designer.id] && <Details designer={designer} />}
               </div>
 
-              <DesignerActions
-                designer={designer}
-                toggleDetails={toggleDetails}
-                toggleShortlist={toggleShortlist}
-                showDetailsState={showDetails[designer.id]}
-              />
+             <DesignerActions
+  designer={designer}
+  showDetails={showDetails}
+  hideDetails={hideDetails}
+  toggleShortlist={toggleShortlist}
+  showDetailsState={showDetails[designer.id]}
+/>
             </div>
           ))
         ) : (
