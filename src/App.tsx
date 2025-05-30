@@ -80,12 +80,7 @@ useEffect(() => {
     setShowShortlistedOnly((prevState) => !prevState);
   };
 
-  const toggleDetails = (id: string) => {
-    setShowDetails((prevState) => ({
-      ...prevState,
-      [id]: !prevState[id],
-    }));
-  };
+  
 const showDetails = (id: string) => {
   setShowDetails((prevState) => ({
     ...prevState,
