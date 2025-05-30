@@ -9,19 +9,16 @@ import {
   faCircleExclamation,
 } from "@fortawesome/free-solid-svg-icons";
 
-// Define the shape of the Designer object
 interface Designer {
   id: string;
   shortlisted: boolean;
 }
 
-// Props interface
 interface DesignerActionsProps {
   designer: Designer;
   showDetails: (id: string) => void;
   hideDetails: (id: string) => void;
   toggleShortlist: (id: string) => void;
-  showDetailsState: boolean;
 }
 
 const DesignerActions: React.FC<DesignerActionsProps> = ({
@@ -29,34 +26,29 @@ const DesignerActions: React.FC<DesignerActionsProps> = ({
   showDetails,
   hideDetails,
   toggleShortlist,
-  showDetailsState,
 }) => {
   return (
     <div className="flex justify-around p-3 text-sm text-gray-600 flex-col">
 
-      {/* Show Details */}
-      {!showDetailsState && (
-        <button
-          className="flex items-center space-x-1 p-2 rounded-lg hover:bg-gray-100 transition-colors"
-          onClick={() => showDetails(designer.id)}
-        >
-          <FontAwesomeIcon icon={faChevronRight} className="w-5 h-5" />
-          <span>Details</span>
-        </button>
-      )}
+      {/* Show Details button */}
+      <button
+        className="flex items-center space-x-1 p-2 rounded-lg hover:bg-gray-100 transition-colors"
+        onClick={() => showDetails(designer.id)}
+      >
+        <FontAwesomeIcon icon={faChevronRight} className="w-5 h-5" />
+        <span>Details</span>
+      </button>
 
-      {/* Hide Details */}
-      {showDetailsState && (
-        <button
-          className="flex items-center space-x-1 p-2 rounded-lg hover:bg-gray-100 transition-colors"
-          onClick={() => hideDetails(designer.id)}
-        >
-          <FontAwesomeIcon icon={faEyeSlash} className="w-5 h-5" />
-          <span>Hide</span>
-        </button>
-      )}
+      {/* Hide Details button */}
+      <button
+        className="flex items-center space-x-1 p-2 rounded-lg hover:bg-gray-100 transition-colors"
+        onClick={() => hideDetails(designer.id)}
+      >
+        <FontAwesomeIcon icon={faEyeSlash} className="w-5 h-5" />
+        <span>Hide</span>
+      </button>
 
-      {/* Shortlist */}
+      {/* Shortlist button */}
       <button
         className={`flex items-center space-x-1 p-2 rounded-lg transition-colors ${
           designer.shortlisted ? "text-orange-500 bg-orange-50" : "hover:bg-gray-100"
@@ -85,13 +77,13 @@ const DesignerActions: React.FC<DesignerActionsProps> = ({
         <span>Shortlist</span>
       </button>
 
-      {/* Call */}
+      {/* Call button */}
       <button className="flex items-center space-x-1 p-2 rounded-lg hover:bg-gray-100 transition-colors">
         <FontAwesomeIcon icon={faPhone} className="w-5 h-5" />
         <span>Call</span>
       </button>
 
-      {/* Report */}
+      {/* Report button */}
       <button className="flex items-center space-x-1 p-2 rounded-lg hover:bg-gray-100 transition-colors">
         <FontAwesomeIcon icon={faCircleExclamation} className="w-5 h-5" />
         <span>Report</span>
