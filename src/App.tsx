@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faXmark,
@@ -36,85 +37,34 @@ const App: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchDesigners = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        await new Promise((resolve) => setTimeout(resolve, 1500));
+  
+useEffect(() => {
+  const fetchDesigners = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      // Fetch from the actual API
+      const response = await axios.get<Designer[]>("https://empty-cup-server.onrender.com");
+      const designersData = response.data;
 
-        const dummyData: Designer[] = [
-          {
-            id: "1",
-            name: "Epic Designs",
-            description:
-              "Passionate team of 4 designers working out of Bangalore with an experience of 4 years.",
-            projects: 57,
-            years: 8,
-            price: "$$",
-            phone1: "+91-984532853",
-            phone2: "+91-984532854",
-            shortlisted: false,
-            rating: 3.5,
-          },
-          {
-            id: "2",
-            name: "Studio - D3",
-            description:
-              "Passionate team of 4 designers working out of Bangalore with an experience of 4 years.",
-            projects: 43,
-            years: 6,
-            price: "$$$",
-            phone1: "+91-984532853",
-            phone2: "+91-984532854",
-            shortlisted: false,
-            rating: 3.8,
-          },
-          {
-            id: "3",
-            name: "Creative Spaces",
-            description:
-              "Innovative designs for modern living, specializing in minimalist aesthetics.",
-            projects: 30,
-            years: 5,
-            price: "$",
-            phone1: "+91-987654321",
-            phone2: "+91-987654322",
-            shortlisted: false,
-            rating: 5.0,
-          },
-          {
-            id: "4",
-            name: "Urban Interiors",
-            description:
-              "Transforming urban dwellings into functional and beautiful homes.",
-            projects: 65,
-            years: 10,
-            price: "$$$",
-            phone1: "+91-998877665",
-            phone2: "+91-998877666",
-            shortlisted: false,
-            rating: 4.2,
-          },
-        ];
+      setDesigners(designersData);
 
-        setDesigners(dummyData);
+      // Initialize showDetails state based on fetched designers
+      const initialShowDetails: Record<string, boolean> = {};
+      designersData.forEach((designer) => {
+        initialShowDetails[designer.id] = false;
+      });
+      setShowDetails(initialShowDetails);
+    } catch (err) {
+      setError("Failed to fetch designers. Please try again later.");
+      console.error("Error fetching designers:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-        const initialShowDetails: Record<string, boolean> = {};
-        dummyData.forEach((designer) => {
-          initialShowDetails[designer.id] = false;
-        });
-        setShowDetails(initialShowDetails);
-      } catch (err) {
-        setError("Failed to fetch designers. Please try again later.");
-        console.error("Error fetching designers:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchDesigners();
-  }, []);
+  fetchDesigners();
+}, []);
 
   const toggleShortlist = (id: string) => {
     setDesigners((prevDesigners) =>
