@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faXmark,
-  faSpinner,
-} from "@fortawesome/free-solid-svg-icons";
+import { faXmark, faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 // Import your components
 import Rating from "./components/Rating";
@@ -14,7 +11,6 @@ import Header from "./components/Header";
 import NavBar from "./components/NavBar";
 import Details from "./components/Details";
 
-// rest of your code ...
 // Type definition for a designer
 interface Designer {
   id: string;
@@ -37,34 +33,33 @@ const App: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  
-useEffect(() => {
-  const fetchDesigners = async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      // Fetch from the actual API
-      const response = await axios.get<Designer[]>("https://empty-cup-server.onrender.com/api/designer");
-      const designersData = response.data;
+  useEffect(() => {
+    const fetchDesigners = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        // Fetch from the actual API
+        const response = await axios.get<Designer[]>("https://empty-cup-server.onrender.com/api/designer");
+        const designersData = response.data;
 
-      setDesigners(designersData);
+        setDesigners(designersData);
 
-      // Initialize showDetails state based on fetched designers
-      const initialShowDetails: Record<string, boolean> = {};
-      designersData.forEach((designer) => {
-        initialShowDetails[designer.id] = false;
-      });
-      setShowDetails(initialShowDetails);
-    } catch (err) {
-      setError("Failed to fetch designers. Please try again later.");
-      console.error("Error fetching designers:", err);
-    } finally {
-      setLoading(false);
-    }
-  };
+        // Initialize showDetailsState based on fetched designers
+        const initialShowDetails: Record<string, boolean> = {};
+        designersData.forEach((designer) => {
+          initialShowDetails[designer.id] = false;
+        });
+        setShowDetailsState(initialShowDetails);
+      } catch (err) {
+        setError("Failed to fetch designers. Please try again later.");
+        console.error("Error fetching designers:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  fetchDesigners();
-}, []);
+    fetchDesigners();
+  }, []);
 
   const toggleShortlist = (id: string) => {
     setDesigners((prevDesigners) =>
@@ -80,20 +75,19 @@ useEffect(() => {
     setShowShortlistedOnly((prevState) => !prevState);
   };
 
-  
-const showDetails = (id: string) => {
-  setShowDetailsState((prevState) => ({
-    ...prevState,
-    [id]: true,
-  }));
-};
+  const showDetails = (id: string) => {
+    setShowDetailsState((prevState) => ({
+      ...prevState,
+      [id]: true,
+    }));
+  };
 
-const hideDetails = (id: string) => {
-  setShowDetailsState((prevState) => ({
-    ...prevState,
-    [id]: false,
-  }));
-};
+  const hideDetails = (id: string) => {
+    setShowDetailsState((prevState) => ({
+      ...prevState,
+      [id]: false,
+    }));
+  };
 
   const filteredDesigners = showShortlistedOnly
     ? designers.filter((designer) => designer.shortlisted)
@@ -161,15 +155,16 @@ const hideDetails = (id: string) => {
                   years={designer.years}
                   price={designer.price}
                 />
-                {showDetails[designer.id] && <Details designer={designer} />}
+                {showDetailsState[designer.id] && <Details designer={designer} />}
               </div>
 
-             <DesignerActions
-  designer={designer}
-  showDetails={showDetails}
-  hideDetails={hideDetails}
-  toggleShortlist={toggleShortlist}
-/>
+              <DesignerActions
+                designer={designer}
+                showDetailsState={showDetailsState}
+                showDetails={showDetails}
+                hideDetails={hideDetails}
+                toggleShortlist={toggleShortlist}
+              />
             </div>
           ))
         ) : (
