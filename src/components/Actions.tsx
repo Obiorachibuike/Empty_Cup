@@ -48,7 +48,7 @@ const DesignerActions: React.FC<DesignerActionsProps> = ({
         <span>Hide</span>
       </button>
 
-      {/* Shortlist button */}
+      {/* Shortlist butto */}
       <button
         className={`flex items-center space-x-1 p-2 rounded-lg transition-colors ${
           designer.shortlisted ? "text-orange-500 bg-orange-50" : "hover:bg-gray-100"
