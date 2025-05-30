@@ -86,6 +86,19 @@ useEffect(() => {
       [id]: !prevState[id],
     }));
   };
+const showDetails = (id: string) => {
+  setShowDetails((prevState) => ({
+    ...prevState,
+    [id]: true,
+  }));
+};
+
+const hideDetails = (id: string) => {
+  setShowDetails((prevState) => ({
+    ...prevState,
+    [id]: false,
+  }));
+};
 
   const filteredDesigners = showShortlistedOnly
     ? designers.filter((designer) => designer.shortlisted)
