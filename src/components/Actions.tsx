@@ -18,14 +18,16 @@ interface Designer {
 // Props interface
 interface DesignerActionsProps {
   designer: Designer;
-  toggleDetails: (id: string) => void;
+  showDetails: (id: string) => void;
+  hideDetails: (id: string) => void;
   toggleShortlist: (id: string) => void;
   showDetailsState: boolean;
 }
 
 const DesignerActions: React.FC<DesignerActionsProps> = ({
   designer,
-  toggleDetails,
+  showDetails,
+  hideDetails,
   toggleShortlist,
   showDetailsState,
 }) => {
@@ -36,7 +38,7 @@ const DesignerActions: React.FC<DesignerActionsProps> = ({
       {!showDetailsState && (
         <button
           className="flex items-center space-x-1 p-2 rounded-lg hover:bg-gray-100 transition-colors"
-          onClick={() => toggleDetails(designer.id)}
+          onClick={() => showDetails(designer.id)}
         >
           <FontAwesomeIcon icon={faChevronRight} className="w-5 h-5" />
           <span>Details</span>
@@ -47,7 +49,7 @@ const DesignerActions: React.FC<DesignerActionsProps> = ({
       {showDetailsState && (
         <button
           className="flex items-center space-x-1 p-2 rounded-lg hover:bg-gray-100 transition-colors"
-          onClick={() => toggleDetails(designer.id)}
+          onClick={() => hideDetails(designer.id)}
         >
           <FontAwesomeIcon icon={faEyeSlash} className="w-5 h-5" />
           <span>Hide</span>
