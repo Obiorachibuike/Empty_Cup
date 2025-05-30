@@ -33,7 +33,7 @@ interface Designer {
 const App: React.FC = () => {
   const [designers, setDesigners] = useState<Designer[]>([]);
   const [showShortlistedOnly, setShowShortlistedOnly] = useState<boolean>(false);
-  const [showDetails, setShowDetails] = useState<Record<string, boolean>>({});
+  const [showDetailsState, setShowDetailsState] = useState<Record<string, boolean>>({});
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -82,14 +82,14 @@ useEffect(() => {
 
   
 const showDetails = (id: string) => {
-  setShowDetails((prevState) => ({
+  setShowDetailsState((prevState) => ({
     ...prevState,
     [id]: true,
   }));
 };
 
 const hideDetails = (id: string) => {
-  setShowDetails((prevState) => ({
+  setShowDetailsState((prevState) => ({
     ...prevState,
     [id]: false,
   }));
